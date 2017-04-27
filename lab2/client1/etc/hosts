@@ -1,0 +1,12 @@
+127.0.0.1	localhost
+127.0.1.1	client1.vm	client1
+192.168.1.1	gw1.vm gw1
+192.168.2.1	gw2.vm gw2
+192.168.1.10	router.vm router
+192.168.1.2	switch.vm switch
+192.168.2.3	client2.vm client2
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters

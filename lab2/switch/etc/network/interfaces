@@ -1,0 +1,55 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+# vbox host
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+# NAT for internet
+auto eth4
+iface eth4 inet dhcp
+
+# Gateway for lolcatz vlan
+auto eth1
+iface eth1 inet static
+    address 192.168.1.1
+    netmask 255.255.255.0
+    post-up route add -net 192.168.1.0/24 gw 192.168.1.1
+    # pre-down route del -net 192.168.1.1 netmask 255.255.255.0 gw 192.168.1.1 dev eth1
+
+# vlan10
+auto eth1.10
+iface eth1.10 inet static
+    address 192.168.1.2
+    netmask 255.255.255.0
+    # gateway 192.168.1.1
+    # vlan-raw-device eth1
+
+# Gateway for failure vlan
+auto eth2
+iface eth2 inet static
+    address 192.168.2.1
+    netmask 255.255.255.0
+    post-up route add -net 192.168.2.0/24 gw 192.168.2.1
+
+# vlan20
+auto eth2.20
+iface eth2.20 inet static
+    address 192.168.2.2
+    netmask 255.255.255.0
+    # gateway 192.168.2.1
+    # vlan-raw-device eth2
+
+# Gateway for router
+auto eth3
+iface eth3 inet static
+    address 192.168.3.1
+    netmask 255.255.255.0
+    # gateway 192.168.1.5
